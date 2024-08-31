@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="拉伸基本概念就是 sequence的 actor 拉伸   因为sequenceactor是有坐标的不过我们并不需要 sequence中所有的 物体都拉伸 所以对于不拉神的 物体 sequenceactor 坐标不变但是拉伸的物体 sequenceactor 坐标前进 模仿 UMovieSceneTransformOriginSystem:: FAssignTransformOrigin可以判断是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/09/01/%E6%8B%89%E4%BC%B8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="拉伸基本概念就是 sequence的 actor 拉伸   因为sequenceactor是有坐标的不过我们并不需要 sequence中所有的 物体都拉伸 所以对于不拉神的 物体 sequenceactor 坐标不变但是拉伸的物体 sequenceactor 坐标前进 模仿 UMovieSceneTransformOriginSystem:: FAssignTransformOrigin可以判断是">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/whzhfly/TechImageHost/main/image/20240627012101.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/whzhfly/TechImageHost/main/image/20240627012751.png">
+<meta property="article:published_time" content="2024-08-31T17:48:53.613Z">
+<meta property="article:modified_time" content="2024-06-26T17:30:01.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/whzhfly/TechImageHost/main/image/20240627012101.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-拉伸" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/01/%E6%8B%89%E4%BC%B8/" class="article-date">
+  <time class="dt-published" datetime="2024-08-31T17:48:53.613Z" itemprop="datePublished">2024-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="拉伸"><a href="#拉伸" class="headerlink" title="拉伸"></a>拉伸</h1><p>基本概念就是 sequence的 actor 拉伸   因为sequenceactor是有坐标的<br>不过我们并不需要 sequence中所有的 物体都拉伸 所以<br>对于不拉神的 物体 sequenceactor 坐标不变<br>但是拉伸的物体 sequenceactor 坐标前进</p>
+<p>模仿 UMovieSceneTransformOriginSystem:: FAssignTransformOrigin<br>可以判断是否含有某个 tag 有的话<br>LocationX 前进<br>UMovieSceneTransformStreachOriginSystem </p>
+<p>可以类似<br>UMovieSceneEvaluationHookSystem 的<br>注册 Linker-&gt;GetInstanceRegistry()<br>这样在 ForEachAllocation 即可获取 FSequenceInstance 然后通过tag 与object 关系去判定</p>
+<p>基于这个理念 为什么不想想Attach的方式<br>做一个基础的Car 然后 攻击者以及子弹在这个Car 上即可。<br>实际中就是这个Car 运动就行 如果这个Car 不运动 那么就没有Attach 的移动<br>Car 做一个Track 用来做移动就可 从0-1 从 1-0<br>参考下 <em>UMovieSceneComponentAttachmentSystem</em></p>
+<p><em>UMovieSceneEntityInstantiatorSystem</em> 表示实例阶段 貌似生成实例后就不会OnRUn<br><em>IMovieScenePreAnimatedStateSystemInterface</em> 表示会改变状态 不如Attach 一旦开始作用 会刷新其他下游系统 如位移等</p>
+<p><img src="https://raw.githubusercontent.com/whzhfly/TechImageHost/main/image/20240627012101.png" alt="image.png"></p>
+<h1 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h1><p>一般在OnSchedulePersistentTasks 中 Schedule<br>在OnRun 中Dispach</p>
+<p><img src="https://raw.githubusercontent.com/whzhfly/TechImageHost/main/image/20240627012751.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/01/%E6%8B%89%E4%BC%B8/" data-id="cm0ifubx70001okw4367k1h2d" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/09/01/Blueprint2Python/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/01/%E6%8B%89%E4%BC%B8/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/Blueprint2Python/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
